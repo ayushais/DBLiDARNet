@@ -53,19 +53,20 @@ def main():
       mask_string = example.features.feature['mask_raw'].bytes_list.value[0]
       
       image = np.fromstring(image_string, dtype=np.float32)
-      image = image.reshape((height, width, 5)) 
+      image = image.reshape((1, height, width, 5)) 
       gt_mask = np.fromstring(mask_string, dtype=np.float32)
       gt_mask = gt_mask.reshape((height, width, 1))
       feed_dict = {input_data:image, keep_prob:1, is_training:False}
       start_time = time.time()
-      predicted_mask = sess.run([prediction],feed_dict=feed_dict)
-      print(predicted_mask.shape)
+      predicted_mask = sess.run(prediction, feed_dict=feed_dict)
+      predicted_mask = np.squeeze(predicted_mask, axis=0)
+      predicted_mask = np.argmax(predicted_mask, axis=2)
       
 
-     #  mask = mask > 0
-      # cv2.namedWindow("mask")
-      # cv2.imshow("mask", np.float32(mask))
-      # cv2.waitKey()
+      predicted_mask = predicted_mask > 0
+      cv2.namedWindow("mask")
+      cv2.imshow("mask", np.float32(predicted_mask))
+      cv2.waitKey()
 
     
 
