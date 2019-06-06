@@ -42,8 +42,8 @@ def main():
     prediction = graph.get_tensor_by_name("prediction/conv:0")
     print('loaded graph')
     record_iterator = tf.python_io.tf_record_iterator(FLAGS.validation_record_filename)
-    intersection_total = np.zeros((1,num_classes-1),np.float32)
-    union_total = np.zeros((1,num_classes-1),np.float32)
+    intersection_total = np.zeros((1,3),np.float32)
+    union_total = np.zeros((1,3),np.float32)
 
     for string_record in record_iterator:
       example = tf.train.Example()
@@ -93,9 +93,10 @@ def main():
           viz_combined[0:64,:,:] = label_color
           viz_combined[64:128,:,:] = prediction_color
 
-          cv2.namedWindow("visualization")
-          cv2.imshow("visualization", viz_combined)
-          cv2.waitKey()
+      if FLAGS.is_visualize:
+        cv2.namedWindow("visualization")
+        cv2.imshow("visualization", viz_combined)
+        cv2.waitKey(30)
 
           
 
