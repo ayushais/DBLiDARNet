@@ -58,7 +58,7 @@ def main():
       image = np.fromstring(image_string, dtype=np.float32)
       image = image.reshape((1, height, width, 5)) 
       gt_mask = np.fromstring(mask_string, dtype=np.float32)
-      gt_mask = gt_mask.reshape((height, width, 1))
+      gt_mask = gt_mask.reshape((height, width))
       feed_dict = {input_data:image, keep_prob:1, is_training:False}
       start_time = time.time()
       predicted_mask = sess.run(prediction, feed_dict=feed_dict)
@@ -76,11 +76,11 @@ def main():
         intersection = np.sum(np.logical_and(gt_mask_class, 
                                 predicted_mask_class))
         union = np.sum(predicted_mask_class) + np.sum(gt_mask_class) - intersection
-        print(intersection/union)
+ #       print(intersection/union)
 
-        cv2.waitKey()
-        intersection_total[0,classes-1]+=intersection
-        union_total[0,classes-1]+=union
+#        cv2.waitKey()
+        intersection_total[0,class_id-1]+=intersection
+        union_total[0,class_id-1]+=union
 
       # predicted_mask = np.argmax(predicted_mask, axis=2)
       
