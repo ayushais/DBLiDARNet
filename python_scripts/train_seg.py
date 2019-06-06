@@ -102,6 +102,8 @@ def main():
 
       
   steps_per_epoch = train_data_size//FLAGS.batch_size
+
+  sess = tf.InteractiveSession()
   init_op = tf.group(tf.global_variables_initializer(),
                      tf.local_variables_initializer())
 

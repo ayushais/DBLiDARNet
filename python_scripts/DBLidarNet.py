@@ -26,8 +26,8 @@ class DBLidarNet:
                                  FLAGS.image_width, 
                                  FLAGS.num_classes],
                                  name="labels")
-    self._keep_prob = tf.placeholder(tf.float32, name="keep_prob")
-    self._is_training = tf.placeholder(tf.bool,name="is_training")
+    self.keep_prob = tf.placeholder(tf.float32, name="keep_prob")
+    self.is_training = tf.placeholder(tf.bool,name="is_training")
     
     self._weights = np.loadtxt('weights_squeeze_seg.txt')
 
@@ -36,9 +36,9 @@ class DBLidarNet:
     self._viz_summary_list = []
   def _loss_function(self):
     """ loss function """
-    logits = tf.reshape(self.prediction, (-1, self.num_classes))
+    logits = tf.reshape(self.prediction, (-1, self._num_classes))
     epsilon = tf.constant(value=1e-4)
-    labels = tf.to_float(tf.reshape(self.labels,(-1, self.num_classes)))
+    labels = tf.to_float(tf.reshape(self.labels,(-1, self._num_classes)))
     softmax = tf.nn.softmax(logits) + epsilon
     cross_entropy = -tf.reduce_sum(tf.multiply(labels * tf.log(softmax),
                                    self._weights), reduction_indices=[1])
@@ -68,25 +68,25 @@ class DBLidarNet:
     conv_1 = network_layers.conv_2d(conv_0, 48, 3, 1, 'SAME', 'conv_1')
 
     self._dense_block_0, features, db_output_0 = network_layers.add_block(
-        "dense_block_0", conv_1, 6, 48, 3, self._growth, self._is_training)
+        "dense_block_0", conv_1, 6, 48, 3, self._growth, self.is_training)
 
     transition_0 = tf.nn.max_pool(self._dense_block_0, [ 1, 2, 2, 1 ], 
                                   [1, 2, 2, 1 ], 'VALID') 
     
     self._dense_block_1, features, db_output_1 = network_layers.add_block(
         "dense_block_1", transition_0, 8, features, 3, self._growth,      
-        self._is_training)
+        self.is_training)
 
     transition_1 = tf.nn.max_pool(self._dense_block_1, [ 1, 2, 2, 1 ], 
                                   [1, 2, 2, 1 ], 'VALID') 
 
     dense_block_2, features, db_output_2 = network_layers.add_block(
         "dense_block_2", transition_1, 10, features, 3, self._growth, 
-        self._is_training)
+        self.is_training)
 
     dense_block_3, features, self._db_output_3 = network_layers.add_block(
         "dense_block_3", dense_block_2, 15, features, 3, self._growth, 
-        self._is_training)
+        self.is_training)
    
   def _decoder(self):
     """ decoder definition 
@@ -100,7 +100,7 @@ class DBLidarNet:
     shape = tf.shape(skip_0)
     dense_block_4, features, db_output_4 = network_layers.add_block(
          "dense_block_4", skip_0, 8, shape[3], 3, self._growth, 
-         self._is_training, depth_separable=True)
+         self.is_training, depth_separable=True)
 
 
    
@@ -112,7 +112,7 @@ class DBLidarNet:
     skip_1 = tf.concat([crop,self._dense_block_0],axis=3)
     shape = tf.shape(skip_1)
     dense_block_5, features, db_output_5 = network_layers.add_block(
-        "dense_block_5", skip_1, 6, shape[3], 3, self._growth, self._is_training
+        "dense_block_5", skip_1, 6, shape[3], 3, self._growth, self.is_training
         , depth_separable=True)
 
     self.prediction = network_layers.conv_2d(db_output_5, self._num_classes, 1,
@@ -122,7 +122,7 @@ class DBLidarNet:
     """ optimization function """
     update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
     with tf.control_dependencies(update_ops):
-      return(tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss_value))
+      return(tf.train.AdamOptimizer(self._learning_rate).minimize(self._loss_value))
   def _calculate_iou(self):
     """ Calculating validation IoU and storing summaryfor visualizing  
         predicted segmentation mask

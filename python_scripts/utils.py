@@ -28,7 +28,7 @@ def record_read_and_decode(serialized_example, num_channels, num_classes):
 
 def prepare_dataset(filenames, FLAGS, data_size):
   dataset = tf.data.TFRecordDataset(filenames)
-  dataset = dataset.map(lambda x: record_read_and_decode_bbox(x, FLAGS.num_channels, 
+  dataset = dataset.map(lambda x: record_read_and_decode(x, FLAGS.num_channels, 
                         FLAGS.num_classes)) 
   dataset = dataset.batch(FLAGS.batch_size) 
   dataset = dataset.repeat(FLAGS.total_epochs)
