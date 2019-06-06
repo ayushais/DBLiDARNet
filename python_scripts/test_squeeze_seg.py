@@ -43,6 +43,9 @@ def main():
     prediction = graph.get_tensor_by_name("prediction/conv:0")
     print('loaded graph')
     record_iterator = tf.python_io.tf_record_iterator(FLAGS.validation_record_filename)
+    intersection_total = np.zeros((1,num_classes-1),np.float32)
+    union_total = np.zeros((1,num_classes-1),np.float32)
+
     for string_record in record_iterator:
       example = tf.train.Example()
       example.ParseFromString(string_record)
@@ -61,14 +64,37 @@ def main():
       predicted_mask = sess.run(prediction, feed_dict=feed_dict)
       predicted_mask = np.squeeze(predicted_mask, axis=0)
       predicted_mask = np.argmax(predicted_mask, axis=2)
+      for class_id in range(1,4):
+        gt_mask_class = gt_mask == class_id
+        predicted_mask_class = (predicted_mask == class_id)
+     #   gt_label = np.squeeze(gt_label,axis=2)
+        combined = np.zeros((128, 512),np.float32)
+        combined[0:64,:] = gt_mask_class
+        combined[64:128,:] = predicted_mask_class
+        cv2.namedWindow("prediction")
+        cv2.imshow("prediction",np.float32(combined))
+        intersection = np.sum(np.logical_and(gt_mask_class, 
+                                predicted_mask_class))
+        union = np.sum(predicted_mask_class) + np.sum(gt_mask_class) - intersection
+        print(intersection/union)
+
+        cv2.waitKey()
+        intersection_total[0,classes-1]+=intersection
+        union_total[0,classes-1]+=union
+
+      # predicted_mask = np.argmax(predicted_mask, axis=2)
       
 
-      predicted_mask = predicted_mask > 0
-      cv2.namedWindow("mask")
-      cv2.imshow("mask", np.float32(predicted_mask))
-      cv2.waitKey()
+#       predicted_mask = predicted_mask > 0
+      # cv2.namedWindow("mask")
+      # cv2.imshow("mask", np.float32(predicted_mask))
+      # cv2.waitKey()
 
     
+    IoU = intersection_total/union_total
+    mean_IoU = np.mean(IoU)
+    print(mean_IoU)
+    print(IoU)
 
 
 
