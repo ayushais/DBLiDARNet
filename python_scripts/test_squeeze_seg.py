@@ -19,18 +19,17 @@ def main():
       """model name""")
   tf.app.flags.DEFINE_string('validation_record_filename', '',
       """path to test record""")
-  
+  tf.app.flags.DEFINE_boolean('is_visualize', False,
+      """is_visualize""")
+ 
   if FLAGS.model_name == '':
     print ('model name not specified')
     return
+  car = [165,194,102]
+  pedestrain = [98,141,252]
+  bicyclist = [203,160,141]
 
   with tf.Session() as sess:
-
-    image_width = 512
-    image_height = 64
-    batch_size = 1
-    num_classes = 4
-    num_channels = 1
     model_name = FLAGS.model_name + '.ckpt.meta'
     saver = tf.train.import_meta_graph(model_name)
     model_name = FLAGS.model_name + '.ckpt'
@@ -64,31 +63,45 @@ def main():
       predicted_mask = sess.run(prediction, feed_dict=feed_dict)
       predicted_mask = np.squeeze(predicted_mask, axis=0)
       predicted_mask = np.argmax(predicted_mask, axis=2)
+      if FLAGS.is_visualize:
+        label_color = np.ones((64,512,3), np.uint8)
+        label_color*=255
+        
+        prediction_color = np.ones((64,512,3), np.uint8)
+        prediction_color*=255
+
+
       for class_id in range(1,4):
         gt_mask_class = gt_mask == class_id
         predicted_mask_class = (predicted_mask == class_id)
-     #   gt_label = np.squeeze(gt_label,axis=2)
-        combined = np.zeros((128, 512),np.float32)
-        combined[0:64,:] = gt_mask_class
-        combined[64:128,:] = predicted_mask_class
-        cv2.namedWindow("prediction")
-        cv2.imshow("prediction",np.float32(combined))
         intersection = np.sum(np.logical_and(gt_mask_class, 
                                 predicted_mask_class))
         union = np.sum(predicted_mask_class) + np.sum(gt_mask_class) - intersection
- #       print(intersection/union)
-
-#        cv2.waitKey()
         intersection_total[0,class_id-1]+=intersection
         union_total[0,class_id-1]+=union
+        if FLAGS.is_visualize:
+          if(class_id == 1):
+            label_color[gt_mask_class,:] = car
+            prediction_color[predicted_mask_class,:] = car
+          if(class_id == 2):
+            label_color[gt_mask_class,:] = pedestrain
+            prediction_color[predicted_mask_class,:] = pedestrain
+          if(class_id == 3):
+            label_color[gt_mask_class,:] = bicyclist
+            prediction_color[predicted_mask_class,:] = bicyclist
+          viz_combined = np.zeros((128,512,3), np.uint8)
+          viz_combined[0:64,:,:] = label_color
+          viz_combined[64:128,:,:] = prediction_color
 
-      # predicted_mask = np.argmax(predicted_mask, axis=2)
-      
+          cv2.namedWindow("visualization")
+          cv2.imshow("visualization", viz_combined)
+          cv2.waitKey()
 
-#       predicted_mask = predicted_mask > 0
-      # cv2.namedWindow("mask")
-      # cv2.imshow("mask", np.float32(predicted_mask))
-      # cv2.waitKey()
+          
+
+
+
+
 
     
     IoU = intersection_total/union_total
