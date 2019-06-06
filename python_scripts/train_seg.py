@@ -74,7 +74,6 @@ def main():
   model = DBLidarNet(FLAGS) 
   print('constructor done')
   model.build_graph()
-#  raw_input()
 
   total_parameters = 0
   for variable in tf.trainable_variables():

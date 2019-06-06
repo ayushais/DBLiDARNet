@@ -47,8 +47,8 @@ def add_block(scope_name, bottom, num_layers, in_features, k_size, growth, is_tr
   db_output = []
   db_output = np.array(db_output)
   with tf.variable_scope(scope_name) as scope:
-    for idx in xrange(num_layers):
-      current_layer = add_layer(stack, features, growth, k_size, scope_name+ `idx` + 'W', 
+    for idx in range(num_layers):
+      current_layer = add_layer(stack, features, growth, k_size, scope_name+ str(idx) + 'W', 
           is_training, keep_prob, depth_separable)
       if(db_output.shape[0] == 0):
         db_output = current_layer

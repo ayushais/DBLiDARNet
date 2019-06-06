@@ -87,6 +87,8 @@ class DBLidarNet:
     dense_block_3, features, self._db_output_3 = network_layers.add_block(
         "dense_block_3", dense_block_2, 15, features, 3, self._growth, 
         self.is_training)
+    print('encoder')
+    input()
    
   def _decoder(self):
     """ decoder definition 
