@@ -12,8 +12,8 @@ def main():
                              """model name""")
   tf.app.flags.DEFINE_string('validation_record_filename', '',
                              """path to test record""")
-  tf.app.flags.DEFINE_boolean('is_visualize', False,
-                              """is_visualize""")
+  tf.app.flags.DEFINE_string('is_visualize', 'no',
+                             """is_visualize""")
 
   tf.app.flags.DEFINE_integer('image_width', 512, """image width""")
   if FLAGS.model_name == '':
@@ -53,7 +53,7 @@ def main():
       predicted_mask = sess.run(prediction, feed_dict=feed_dict)
       predicted_mask = np.squeeze(predicted_mask, axis=0)
       predicted_mask = np.argmax(predicted_mask, axis=2)
-      if FLAGS.is_visualize:
+      if FLAGS.is_visualize == 'yes':
         label_color = np.ones((64, FLAGS.image_width, 3), np.uint8)
         label_color *= 255
         prediction_color = np.ones((64, FLAGS.image_width, 3), np.uint8)
@@ -67,7 +67,7 @@ def main():
         intersection
         intersection_total[0, class_id-1] += intersection
         union_total[0, class_id-1] += union
-        if FLAGS.is_visualize:
+        if FLAGS.is_visualize == 'yes':
           if class_id == 1:
             label_color[gt_mask_class, :] = car
             prediction_color[predicted_mask_class, :] = car
@@ -81,7 +81,7 @@ def main():
           viz_combined[0:64, :, :] = label_color
           viz_combined[64:128, :, :] = prediction_color
 
-      if FLAGS.is_visualize:
+      if FLAGS.is_visualize == 'yes':
         cv2.namedWindow("visualization")
         cv2.imshow("visualization", viz_combined)
         cv2.waitKey(30)
