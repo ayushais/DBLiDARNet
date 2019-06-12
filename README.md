@@ -1,6 +1,6 @@
 # DeepTemporalSeg
 
-This repository contains code to learn a model for semantic segmentation of a 3D LiDAR scan 
+This repository contains code to learn a model for semantic segmentation of 3D LiDAR scans 
 #### Related Publication
 
 Ayush Dewan, Wolfram Burgard  
