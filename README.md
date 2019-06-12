@@ -93,10 +93,6 @@ python test_model.py --path_to_saved_model learned_models/my_model_retrain_55031
 
 ```
 
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true">
-    <source src="dewan-20icra_website.mp4" type="video/mp4">
-  </video>
-</figure>
 
+![|640X394](dewan-20icra_website.mp4)
 
