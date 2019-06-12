@@ -92,6 +92,6 @@ Parameters
 python test_model.py --path_to_saved_model learned_models/my_model_retrain_55031  --path_to_testing_data ../dataset/testing_data.hdf5
 
 ```
-![](dewan-20icra_website.mp4 =640X394)
+![](dewan-20icra_website.mp4)
 
 
