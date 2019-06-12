@@ -56,7 +56,7 @@ def main():
       if FLAGS.is_visualize:
         label_color = np.ones((64, FLAGS.image_width, 3), np.uint8)
         label_color *= 255
-        prediction_color = np.ones((64, FLAGS,.image_width, 3), np.uint8)
+        prediction_color = np.ones((64, FLAGS.image_width, 3), np.uint8)
         prediction_color *= 255
       for class_id in range(1, 4):
         gt_mask_class = gt_mask == class_id
