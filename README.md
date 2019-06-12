@@ -48,7 +48,7 @@ This will download the following datasets:
 All the files required for training and testing the model is in python_scripts folder. To train the model following script has to be executed.
 
 ```
-python train_seg.py 
+train_seg.py 
 
 Parameters
 --model_name (default: lidar_segmentation)
@@ -79,17 +79,22 @@ python train_seg.py --model_name lidar_segmentation --train_record_filename ../d
 To test the model we provide the code for calculating the FPR-95 error. The model is tested on 50,000 positive and negative image patches from the testing data. This script prints the FPR-95 error, plots the curve between TPR and FPR, and stores the data used for plotting the curve.
 
 ```
-python test_model.py
+test.py 
 
 Parameters
---path_to_saved_model
---path_to_testing_data
+
+--model_name 
+--validation_record_filename
+--is_visualize (default: no)
+--image_width (default: 512)
+
 
 ```
 
 #### 2.4.1. Example command for testing a trained model
 ```
-python test_model.py --path_to_saved_model learned_models/my_model_retrain_55031  --path_to_testing_data ../dataset/testing_data.hdf5
+
+python test.py --model_name /home/dewan/code/dblidarnet/models/seg_python3_190 --validation_record_filename /home/dewan/data_training/squeeze_seg_val_wo_hot_encoding/squeeze_seg_all_classes_validation_wo_hot_encoding.records --is_visualize yes
 
 ```
 
