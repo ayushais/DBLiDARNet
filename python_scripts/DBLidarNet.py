@@ -69,7 +69,7 @@ class DBLidarNet:
     transition_1 = tf.nn.max_pool(self._dense_block_1, [1, 2, 2, 1],
                                   [1, 2, 2, 1], 'VALID')
 
-    _, features, _ = network_layers.add_block(
+    dense_block_2, features, _ = network_layers.add_block(
         "dense_block_2", transition_1, 10, features, 3, self._growth,
         self.is_training)
 
