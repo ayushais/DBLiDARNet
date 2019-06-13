@@ -73,7 +73,7 @@ Parameters
 #### 2.3.1. Example commands for starting the training 
 
 ```
-python train_seg.py --model_name lidar_segmentation --train_record_filename ../datasets/squeeze_seg_train/ --validation_record_filename ../datasrts/squeeze_seg_validation/ --image_width 512 --batch_size 2
+python train_seg.py --model_name lidar_segmentation --train_record_filename ../datasets/squeeze_seg_train/ --validation_record_filename ../datasets/squeeze_seg_validation/ --image_width 512 --batch_size 2
 ```
 
 ### 2.4. Testing the model
