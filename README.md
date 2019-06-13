@@ -2,7 +2,9 @@
 
 This repository contains code to learn a model for semantic segmentation of 3D LiDAR scans 
 
-<img src="https://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif.gif" width="40" height="40" />
+
+
+<img src="http://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif.gif" width="580" height="394" align="center" />
 
 #### Related Publication
 
@@ -30,9 +32,8 @@ This software is released under GPLv3. If you use it in academic work, please ci
 
 ### 2.1. Prerequisites
 
-* Tensorflow
+* Tensorflow 
 * Pyhton 3.6
-* H5py
 
 ### 2.2. Dataset
 
@@ -82,7 +83,7 @@ python train_seg.py --model_name lidar_segmentation --train_record_filename ../d
 
 ```
 This will download the models trained on the dataset from https://github.com/BichenWuUCB/SqueezeSeg
-and KITTI tracking bencmark
+and KITTI tracking benchmark
 
 
 
