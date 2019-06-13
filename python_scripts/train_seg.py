@@ -23,7 +23,7 @@ def main():
   tf.app.flags.DEFINE_string('log_dir', '',
                              """path to log directory""")
   tf.app.flags.DEFINE_string('path_to_store_models', 'learned_models/',
-                             """path to log directory""")
+                             """path to store models""")
   tf.app.flags.DEFINE_float('learning_rate', 0.0001, """learning rate""")
   tf.app.flags.DEFINE_float('eta', 0.0005, """l2 norm coefficient""")
   tf.app.flags.DEFINE_integer('total_epochs', 200,

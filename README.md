@@ -1,6 +1,9 @@
 # DeepTemporalSeg
 
 This repository contains code to learn a model for semantic segmentation of 3D LiDAR scans 
+
+<img src="https://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif.gif" width="40" height="40" />
+
 #### Related Publication
 
 Ayush Dewan, Wolfram Burgard  
@@ -13,13 +16,10 @@ LiDAR Scans](http://ais.informatik.uni-freiburg.de/publications/papers/dewan18ir
 This software is released under GPLv3. If you use it in academic work, please cite:
 
 ```
-@inproceedings{dewan2018iros,
+@article{dewan-deeptemporalseg,
   author = {Ayush Dewan and Wolfram Burgard},
-  title = {DeepTemporalSeg: Temporally Consistent Semantic Segmentation of 3D
-LiDAR Scans 
-},
+  title = {DeepTemporalSeg: Temporally Consistent Semantic Segmentation of 3D LiDAR Scans},
   booktitle = {Proc.~of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
-  address = {},
   year = {2019},
   url = {http://ais.informatik.uni-freiburg.de/publications/papers/dewan18iros.pdf}
 }
@@ -72,7 +72,7 @@ Parameters
 #### 2.3.1. Example commands for starting the training 
 
 ```
-python train_seg.py --model_name lidar_segmentation --train_record_filename ../datasets/squeeze_seg/squeeze_seg_training/ --validation_record_filename ../datasrts/squeeze_seg/squeeze_seg_val/ --image_width 512 --batch_size 2
+python train_seg.py --model_name lidar_segmentation --train_record_filename ../datasets/squeeze_seg_train/ --validation_record_filename ../datasrts/squeeze_seg_validation/ --image_width 512 --batch_size 2
 ```
 
 ### 2.4. Testing the model
@@ -102,7 +102,7 @@ Parameters
 
 #### 2.4.1. Example command for testing a trained model
 ```
-python test.py --model_name ../models/squeeze_seg --validation_record_filename ../datasets/squeeze_seg_validation.records --is_visualize yes
+python test.py --model_name ../models/squeeze_seg --validation_record_filename ../datasets/squeeze_seg_validation/squeeze_seg_validation.records --is_visualize yes
 
 ```
 
