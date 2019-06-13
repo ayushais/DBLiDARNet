@@ -78,7 +78,7 @@ python train_seg.py --model_name lidar_segmentation --train_record_filename ../d
 ### 2.4. Testing the model
 
 ```
-./download_dataset.sh
+./download_models.sh
 
 ```
 This will download the models trained on the dataset from https://github.com/BichenWuUCB/SqueezeSeg
