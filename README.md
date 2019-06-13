@@ -43,7 +43,7 @@ LiDAR Scans
 
 This will download the following datasets:
 * tfrecord files for the dataset from https://github.com/BichenWuUCB/SqueezeSeg
-* tfrecords files for the dataset generated from the KITTI tracking sequence by us
+* tfrecords files for our dataset generated from the KITTI tracking benchmark
 ### 2.3. Training the model
 All the files required for training and testing the model is in python_scripts folder. To train the model following script has to be executed.
 
@@ -76,7 +76,16 @@ python train_seg.py --model_name lidar_segmentation --train_record_filename ../d
 ```
 
 ### 2.4. Testing the model
-To test the model we provide the code for calculating the FPR-95 error. The model is tested on 50,000 positive and negative image patches from the testing data. This script prints the FPR-95 error, plots the curve between TPR and FPR, and stores the data used for plotting the curve.
+
+```
+./download_dataset.sh
+
+```
+This will download the models trained on the dataset from https://github.com/BichenWuUCB/SqueezeSeg
+and KITTI tracking bencmark
+
+
+
 
 ```
 test.py 
@@ -93,8 +102,7 @@ Parameters
 
 #### 2.4.1. Example command for testing a trained model
 ```
-
-python test.py --model_name /home/dewan/code/dblidarnet/models/seg_python3_190 --validation_record_filename /home/dewan/data_training/squeeze_seg_val_wo_hot_encoding/squeeze_seg_all_classes_validation_wo_hot_encoding.records --is_visualize yes
+python test.py --model_name ../models/squeeze_seg --validation_record_filename ../datasets/squeeze_seg_validation.records --is_visualize yes
 
 ```
 
