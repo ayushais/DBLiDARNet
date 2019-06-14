@@ -4,6 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+
 import numpy as np
 
 import cv2
@@ -91,9 +93,9 @@ def main():
         cv2.waitKey(30)
     IoU = intersection_total/union_total
     mean_IoU = np.mean(IoU)
-    print('car IoU: {}'.format(IoU[0]))
-    print('pedestrian IoU: {}'.format(IoU[1]))
-    print('bicylist IoU: {}'.format(IoU[2]))
+    print('car IoU: {}'.format(IoU[0][0]))
+    print('pedestrian IoU: {}'.format(IoU[0][1]))
+    print('bicylist IoU: {}'.format(IoU[0][2]))
     print('mean IoU: {}'.format(mean_IoU))
 if __name__ == '__main__':
   main()
