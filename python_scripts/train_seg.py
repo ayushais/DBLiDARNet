@@ -1,3 +1,5 @@
+""" training script"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -34,6 +36,9 @@ def main():
   tf.app.flags.DEFINE_integer('num_channels', 5, """number of channels""")
   tf.app.flags.DEFINE_integer('num_classes', 4, """number of classes""")
   tf.app.flags.DEFINE_integer('growth', 16, """dense block growth rate""")
+  tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
+
+  os.environ['CUDA_VISIBLE_DEVICES'] = FLAGS.gpu
   if FLAGS.train_record_filename == '':
     print('train record filename not specified')
     return
