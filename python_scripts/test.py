@@ -18,6 +18,8 @@ def main():
                              """is_visualize""")
 
   tf.app.flags.DEFINE_integer('image_width', 512, """image width""")
+  tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
+  os.environ['CUDA_VISIBLE_DEVICES'] = FLAGS.gpu
   if FLAGS.model_name == '':
     print('model name not specified')
     return
@@ -89,8 +91,10 @@ def main():
         cv2.waitKey(30)
     IoU = intersection_total/union_total
     mean_IoU = np.mean(IoU)
-    print(mean_IoU)
-    print(IoU)
+    print('car IoU: {}'.format(IoU[0]))
+    print('pedestrian IoU: {}'.format(IoU[1]))
+    print('bicylist IoU: {}'.format(IoU[2]))
+    print('mean IoU: {}'.format(mean_IoU))
 if __name__ == '__main__':
   main()
 

@@ -98,7 +98,7 @@ Parameters
 --validation_record_filename
 --is_visualize (default: no)
 --image_width (default: 512)
-
+--gpu (default: 0)
 
 ```
 
