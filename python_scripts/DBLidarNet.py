@@ -32,7 +32,8 @@ class DBLidarNet:
     """ loss function """
     logits = tf.reshape(self.prediction, (-1, self._num_classes))
     epsilon = tf.constant(value=1e-4)
-    labels = tf.to_float(tf.reshape(self.labels, (-1, self._num_classes)))
+    labels = tf.cast(tf.reshape(self.labels, (-1, self._num_classes)), 
+                     tf.float32)
     softmax = tf.nn.softmax(logits) + epsilon
     cross_entropy = -tf.reduce_sum(tf.multiply(labels * tf.log(softmax),
                                                self._weights),

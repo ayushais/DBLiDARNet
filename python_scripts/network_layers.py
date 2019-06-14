@@ -118,11 +118,11 @@ def add_layer(bottom, output, k_size, name, is_training,
   if depth_separable:
     current_layer = conv_2d_depth_separable(current_layer, output,
                                             k_size, 1, 'SAME', name)
-    current_layer = tf.nn.dropout(current_layer, keep_prob)
+    current_layer = tf.nn.dropout(current_layer, rate=1-keep_prob)
   else:
     current_layer = conv_2d(current_layer, output, k_size, 1,
                             'SAME', name)
-    current_layer = tf.nn.dropout(current_layer, keep_prob)
+    current_layer = tf.nn.dropout(current_layer, rate=1-keep_prob)
   return current_layer
 def add_block(scope_name, bottom, num_layers, in_features, k_size, growth,
               is_training, keep_prob=1.0,
