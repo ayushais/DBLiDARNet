@@ -66,6 +66,7 @@ Parameters
 --num_channels (default: 5)
 --num_classes (default: 4)
 --growth (default: 16)
+--gpu (default: 0)
 
 ```
 
