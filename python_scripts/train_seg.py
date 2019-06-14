@@ -121,7 +121,7 @@ def main():
   save_steps = steps_per_epoch * 5
 
   ckpt_saver = tf.train.Saver(tf.global_variables(), max_to_keep=80)
-  print('training starts now')
+  print('training starts after buffer is filled for shuffling')
   while True:
     try:
       image, mask = sess.run([image_train, annotation_train])
