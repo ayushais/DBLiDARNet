@@ -44,7 +44,7 @@ This software is released under GPLv3. If you use it in academic work, please ci
 
 This will download the following datasets:
 * tfrecord files for the dataset from https://github.com/BichenWuUCB/SqueezeSeg
-* tfrecords files for our dataset generated from the KITTI tracking benchmark.
+* tfrecords files for our dataset generated from the KITTI tracking benchmark. The details regarding the dataset are described in the paper. 
 ### 2.3. Training the model
 All the files required for training and testing the model is in python_scripts folder. To train the model following script has to be executed.
 
