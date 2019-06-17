@@ -6,12 +6,6 @@ This repository contains code to learn a model for semantic segmentation of 3D L
 
 <img src="http://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif.gif" width="580" height="394" align="center" />
 
-#### Related Publication
-
-Ayush Dewan, Wolfram Burgard  
-**[DeepTemporalSeg: Temporally Consistent Semantic Segmentation of 3D
-LiDAR Scans](http://ais.informatik.uni-freiburg.de/publications/papers/dewan18iros.pdf)**  
-*IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Madrid, Spain, 2018*  
 
 ## 1. License
 
