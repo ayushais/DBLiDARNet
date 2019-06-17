@@ -4,7 +4,7 @@ This repository contains code to learn a model for semantic segmentation of 3D L
 
 
 
-<img src="http://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif.gif" width="580" height="394" align="center" />
+<img src="http://deep-temporal-seg.informatik.uni-freiburg.de/ezgif.com-video-to-gif_small.gif" width="580" height="394" align="center" />
 
 
 ## 1. License
