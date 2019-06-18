@@ -15,7 +15,7 @@ This software is released under GPLv3. If you use it in academic work, please ci
 @article{dewan-deeptemporalseg,
   author = {Ayush Dewan and Wolfram Burgard},
   title = {DeepTemporalSeg: Temporally Consistent Semantic Segmentation of 3D LiDAR Scans},
-  booktitle = {},
+  booktitle = {https://arxiv.org/abs/1906.06962},
   year = {2019},
   url = {http://deep-temporal-seg.informatik.uni-freiburg.de/dewan_deep_temporal_seg.pdf}
 }
