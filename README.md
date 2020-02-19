@@ -101,7 +101,30 @@ Parameters
 python test.py --model_name ../models/squeeze_seg --validation_record_filename ../datasets/squeeze_seg_validation/squeeze_seg_validation.records --is_visualize yes
 
 ```
-
+## Results on Semantic Kitti http://semantic-kitti.org/
+```
+Acc avg 0.833
+IoU avg 0.376
+IoU class 1 [car] = 0.815
+IoU class 2 [bicycle] = 0.294
+IoU class 3 [motorcycle] = 0.196
+IoU class 4 [truck] = 0.066
+IoU class 5 [other-vehicle] = 0.065
+IoU class 6 [person] = 0.237
+IoU class 7 [bicyclist] = 0.201
+IoU class 8 [motorcyclist] = 0.024
+IoU class 9 [road] = 0.858
+IoU class 10 [parking] = 0.087
+IoU class 11 [sidewalk] = 0.593
+IoU class 12 [other-ground] = 0.001
+IoU class 13 [building] = 0.786
+IoU class 14 [fence] = 0.396
+IoU class 15 [vegetation] = 0.771
+IoU class 16 [trunk] = 0.460
+IoU class 17 [terrain] = 0.581
+IoU class 18 [pole] = 0.326
+IoU class 19 [traffic-sign] = 0.391
+```
 
 
 
